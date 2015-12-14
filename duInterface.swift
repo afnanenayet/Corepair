@@ -14,7 +14,7 @@ class clUtil {
         
         var argument: String
         
-        if verify == true {
+        if verify {
             argument = "--verify"
         }
         
