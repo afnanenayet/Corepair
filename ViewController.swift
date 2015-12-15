@@ -12,7 +12,7 @@ class ViewController: NSViewController {
     @IBOutlet weak var verifyButton: NSButton!
     @IBOutlet weak var repairButton: NSButton!
     @IBOutlet weak var diskOption: NSMatrix!
-    @IBOutlet weak var outputField: NSScrollView!
+    
     
     override func viewDidAppear() {
         self.view.window!.title = "Repair Permissions"
@@ -22,19 +22,21 @@ class ViewController: NSViewController {
         super.viewDidLoad()
     }
     
-
-    override var representedObject: AnyObject? {
-        didSet {
-        // Update the view, if already loaded.
-        }
+    @IBOutlet var tStore: NSTextView!
+    
+    @IBAction func verifyClicked(sender: AnyObject) {
+        print("Verify button clicked") // DEBUG
+        
+        let shellInterface = clUtil()
+        tStore.textStorage!.mutableString.setString(shellInterface.diskCommand("/", verify: true))
     }
     
-    @IBAction func repairButton(sender: AnyObject) {
-        let shellInterface = clUtil()
+    @IBAction func repairClicked(sender: AnyObject) {
+        print("Repair button clicked") // DEBUG
         
-        shellInterface.diskCommand("/", verify: true);
+        let shellInterface = clUtil()
+        // TODO change verify to false
+        tStore.textStorage!.mutableString.setString(shellInterface.diskCommand("/", verify: true))
     }
-
-
 }
 

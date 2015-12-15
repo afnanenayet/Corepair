@@ -9,6 +9,7 @@
 import Cocoa
 import Foundation
 class clUtil {
+    // (path of disk to be checked as string, true if verifying, false if repairing)
     
     func diskCommand (path: String, verify: Bool) -> String {
         
@@ -28,11 +29,13 @@ class clUtil {
         
         let pipe = NSPipe()
         
+        task.standardError = pipe
         task.standardOutput = pipe
         task.launch()
         
         let data = pipe.fileHandleForReading.readDataToEndOfFile()
         let output = String(data: data, encoding: NSUTF8StringEncoding)
+        print(output)
         return output!
     }
     
